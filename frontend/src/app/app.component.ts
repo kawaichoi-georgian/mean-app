@@ -15,6 +15,7 @@ export class AppComponent {
   inputValue = '';
   submittedItem: any = null;
   allItems: any[] = [];
+  errorMessage = '';  
 
   constructor(private dataService: DataService) {
     this.fetchAllItems();
@@ -26,9 +27,18 @@ export class AppComponent {
       next: (res: any) => {
         this.submittedItem = res.savedItem;
         this.inputValue = '';
+        this.errorMessage = ''; // clear previous error
         this.fetchAllItems(); // refresh list
       },
-      error: (err) => console.error(err)
+      error: (err) => {
+        // Check if backend sends duplication info
+        if (err.status === 400 && err.error?.error === 'Duplicate item') {
+          this.errorMessage = 'Item already exists. Please enter a different name.';
+        } else {
+          this.errorMessage = 'An error occurred. Please try again.';
+        }
+        console.error(err);
+      }
     });
   }
 
