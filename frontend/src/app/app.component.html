@@ -5,6 +5,11 @@
   <button type="submit">Submit</button>
 </form>
 
+<!-- Show error if exists -->
+<div *ngIf="errorMessage" style="color: red; margin-top: 8px;">
+  {{ errorMessage }}
+</div>
+
 <!-- Display last submitted item -->
 <div *ngIf="submittedItem">
   <h3>✅ Last submitted item:</h3>

@@ -16,9 +16,17 @@ const getItems = async (req, res) => {
 const addItem = async (req, res) => {
   try {
     const db = await connectDB();
+    const collection = db.collection('items'); // your collection name
     const { name } = req.body;
-    const result = await db.collection("items").insertOne({ name });
-    res.status(201).json({ message: "Item added", savedItem: result.ops ? result.ops[0] : { _id: result.insertedId, name } });
+
+    // Check if item already exists
+    const existingItem = await collection.findOne({ name });
+    if (existingItem) {
+      return res.status(400).json({ error: 'Duplicate item' });
+    }
+
+    const result = await collection.insertOne({ name, createdAt: new Date()  });
+    res.status(201).json({ message: "Item added", savedItem: { _id: result.insertedId, name } });
   } catch (err) {
     console.error("❌ Error adding item:", err);
     res.status(500).json({ error: err.message });
