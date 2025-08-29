@@ -1,0 +1,20 @@
+<h1>MEAN Stack Test</h1>
+
+<form (ngSubmit)="submitForm()" #myForm="ngForm">
+  <input type="text" [(ngModel)]="inputValue" name="itemName" required>
+  <button type="submit">Submit</button>
+</form>
+
+<!-- Display last submitted item -->
+<div *ngIf="submittedItem">
+  <h3>✅ Last submitted item:</h3>
+  <pre>{{ submittedItem | json }}</pre>
+</div>
+
+<!-- Display all items -->
+<div *ngIf="allItems.length">
+  <h3>📜 All items:</h3>
+  <ul>
+    <li *ngFor="let item of allItems">{{ item.name }}</li>
+  </ul>
+</div>
