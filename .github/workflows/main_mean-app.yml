@@ -30,6 +30,14 @@ jobs:
       - name: Build frontend (Angular)
         run: |
           npm run build --if-present --prod
+
+      
+      - name: List build directory (for debugging)
+        run: |
+          ls -al dist/mean-app/
+
+      - name: Move build files to public folder
+        run: |
           mv dist/mean-app/* public/
 
       - name: Run tests
@@ -71,3 +79,4 @@ jobs:
           package: .
 
           
+
