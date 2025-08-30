@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class DataService {
-  private apiUrl = 'http://localhost:5000/api/items';
+  // private apiUrl = '/api/items';   // relative path 
+  private apiUrl = process.env.API_URL || 'http://localhost:5000/api';  // Default to localhost if not set
 
   constructor(private http: HttpClient) {}
 
