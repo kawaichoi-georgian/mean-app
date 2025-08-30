@@ -34,7 +34,7 @@ jobs:
       
       - name: List build directory (for debugging)
         run: |
-          ls -al dist/mean-app/
+          ls -al dist/
 
       - name: Move build files to public folder
         run: |
@@ -79,4 +79,5 @@ jobs:
           package: .
 
           
+
 
