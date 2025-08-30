@@ -38,7 +38,7 @@ jobs:
 
       - name: Move build files to public folder
         run: |
-          mv dist/mean-app/* public/
+          mv dist/frontend/* public/
 
       - name: Run tests
         run: |
@@ -79,5 +79,6 @@ jobs:
           package: .
 
           
+
 
 
